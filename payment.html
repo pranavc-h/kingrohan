@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial.0">
     <title>Secure Payment - SAM Garage Official</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -36,19 +36,19 @@
                 <li>Ensure the amount displayed is <span class="font-bold">₹39</span>.</li>
                 <li>Proceed to make the payment.</li>
                 <li>Take a screenshot of the transaction confirmation.</li>
-                <li>Click the button below to send proof via WhatsApp.</li>
+                <li>Click one of the buttons below to send proof via WhatsApp.</li>
             </ol>
         </div>
         
-        <!-- WhatsApp Proof Button -->
-        <div class="mt-6">
-            <button onclick="confirmPayment()" class="bg-blue-600 text-white px-4 py-2 rounded shadow-lg hover:bg-blue-700 transition">
-                Send Payment Proof via WhatsApp
+        <!-- WhatsApp Proof Buttons -->
+        <div class="mt-6 flex flex-col gap-3">
+            <button onclick="sendProof('7621000916')" class="bg-blue-600 text-white px-4 py-2 rounded shadow-lg hover:bg-blue-700 transition">
+                Send Proof via WhatsApp 1
+            </button>
+            <button onclick="sendProof('9110218701')" class="bg-green-600 text-white px-4 py-2 rounded shadow-lg hover:bg-green-700 transition">
+                Send Proof via WhatsApp 2
             </button>
         </div>
-
-
-        
     </div>
 
     <!-- Footer -->
@@ -57,7 +57,7 @@
     </footer>
 
     <script>
-        function confirmPayment() {
+        function sendProof(number) {
             Swal.fire({
                 title: "Payment Completed?",
                 text: "Ensure you have completed the payment before sending proof.",
@@ -67,7 +67,7 @@
                 cancelButtonText: "Cancel"
             }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location.href = "https://wa.me/917621000916?text=Hello,%20I%20have%20paid%20₹39%20for%20the%20NWKRTC%20Eicher%20BS-III%20Mod.%20Here%20is%20my%20payment%20proof.";
+                    window.location.href = `https://wa.me/91${number}?text=Hello,%20I%20have%20paid%20₹39%20for%20the%20NWKRTC%20Eicher%20BS-III%20Mod.%20Here%20is%20my%20payment%20proof.`;
                 }
             });
         }
