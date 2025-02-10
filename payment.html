@@ -18,41 +18,26 @@
     <!-- Payment Container -->
     <div class="max-w-lg mx-auto my-10 bg-white p-6 rounded-lg shadow-lg text-center">
         <h1 class="text-2xl font-bold text-blue-800">Complete Your Payment</h1>
-        <p class="mt-2 text-gray-700">Securely pay <span class="font-bold text-red-600">₹39</span> using UPI or QR Code.</p>
+        <p class="mt-2 text-gray-700">Scan the QR code below to pay <span class="font-bold text-red-600">₹39</span>.</p>
         
-        <!-- Payment Details -->
-        <div class="mt-4 bg-gray-100 p-4 rounded shadow-sm text-left">
-            <p class="text-gray-600">Order ID: <span class="font-semibold">#SGO123456</span></p>
-            <p class="text-gray-600">Payment Status: <span class="text-yellow-500 font-semibold">Pending</span></p>
-            <p class="text-gray-600">Time Left: <span id="timer" class="text-red-600 font-semibold">10:00</span></p>
-        </div>
-
-        <!-- QR Code & Payment Options -->
+        <!-- QR Code -->
         <div class="mt-6 flex flex-col items-center">
             <img src="qr-code.jpg" alt="QR Code" class="w-40 mx-auto rounded-lg shadow-md">
-            <p class="text-sm text-gray-600 mt-2">Scan to Pay: <span class="font-semibold">rohan.21@superyes</span></p>
-            <p class="text-gray-700 mt-2">If the link does not work, manually enter this UPI ID in your app:</p>
-            <p class="text-lg font-bold text-blue-700">rohan.21@superyes</p>
+            <p class="text-sm text-gray-600 mt-2">Scan the QR code using any UPI app to complete the payment.</p>
         </div>
-
-        <!-- UPI Payment Buttons -->
-        <div class="mt-4 flex flex-col gap-3">
-            <a href="upi://pay?pa=rohan.21@superyes&pn=SAM%20Garage&am=39.00&cu=INR&tn=Purchase%20of%20NWKRTC%20Eicher%20BS-III" 
-               class="bg-green-600 text-white px-5 py-2 rounded shadow-lg hover:bg-green-700 transition inline-block">
-                Pay via UPI App
-            </a>
-            <a href="phonepe://pay?pa=rohan.21@superyes&pn=SAM%20Garage&am=39.00&cu=INR" 
-               class="bg-purple-600 text-white px-5 py-2 rounded shadow-lg hover:bg-purple-700 transition inline-block">
-                Pay via PhonePe
-            </a>
-            <a href="tez://upi/pay?pa=rohan.21@superyes&pn=SAM%20Garage&am=39.00&cu=INR" 
-               class="bg-blue-600 text-white px-5 py-2 rounded shadow-lg hover:bg-blue-700 transition inline-block">
-                Pay via Google Pay
-            </a>
-            <a href="paytmmp://pay?pa=rohan.21@superyes&pn=SAM%20Garage&am=39.00&cu=INR" 
-               class="bg-yellow-600 text-white px-5 py-2 rounded shadow-lg hover:bg-yellow-700 transition inline-block">
-                Pay via Paytm
-            </a>
+        
+        <!-- Payment Instructions -->
+        <div class="mt-6 text-left bg-gray-100 p-4 rounded shadow-sm">
+            <h3 class="text-lg font-semibold text-gray-800">How to Pay?</h3>
+            <ol class="list-decimal ml-5 text-gray-700">
+                <li>Open any UPI-supported app (Google Pay, PhonePe, Paytm, etc.).</li>
+                <li>Tap on the "Scan & Pay" option.</li>
+                <li>Scan the above QR code.</li>
+                <li>Ensure the amount displayed is <span class="font-bold">₹39</span>.</li>
+                <li>Proceed to make the payment.</li>
+                <li>Take a screenshot of the transaction confirmation.</li>
+                <li>Click the button below to send proof via WhatsApp.</li>
+            </ol>
         </div>
         
         <!-- WhatsApp Proof Button -->
@@ -83,88 +68,6 @@
                 }
             });
         }
-
-        // Payment Timer Countdown
-        let timeLeft = 600;
-        function updateTimer() {
-            let minutes = Math.floor(timeLeft / 60);
-            let seconds = timeLeft % 60;
-            document.getElementById("timer").innerText = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-            if (timeLeft > 0) {
-                timeLeft--;
-                setTimeout(updateTimer, 1000);
-            } else {
-                Swal.fire({
-                    title: "Payment Time Expired!",
-                    text: "Please refresh and try again.",
-                    icon: "error"
-                });
-            }
-        }
-        updateTimer();
-    </script>
-</body>
-</html>
-0:00</span></p>
-        </div>
-
-        <!-- QR Code & Payment Options -->
-        <div class="mt-6 flex flex-col items-center">
-            <img src="qr-code.jpg" alt="QR Code" class="w-40 mx-auto rounded-lg shadow-md">
-            <p class="text-sm text-gray-600 mt-2">Scan to Pay: <span class="font-semibold">rohan.21@superyes</span></p>
-            <a href="https://pay.google.com/gp/p/ui/pay?pa=rohan.21@superyes&pn=SAM%20Garage&am=39&cu=INR" 
-               class="mt-4 bg-green-600 text-white px-5 py-2 rounded shadow-lg hover:bg-green-700 transition inline-block">
-                Pay via UPI App
-            </a>
-        </div>
-        
-        <!-- WhatsApp Proof Button -->
-        <div class="mt-6">
-            <button onclick="sendProof()" class="bg-blue-600 text-white px-4 py-2 rounded shadow-lg hover:bg-blue-700 transition">
-                Send Payment Proof via WhatsApp
-            </button>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer class="bg-blue-900 text-white text-center p-4 mt-10 shadow-md">
-        <p>&copy; 2025 SAM Garage Official. All rights reserved.</p>
-    </footer>
-
-    <script>
-        function sendProof() {
-            Swal.fire({
-                title: "Payment Completed?",
-                text: "Ensure your payment is done before proceeding.",
-                icon: "question",
-                showCancelButton: true,
-                confirmButtonText: "Yes, Send Proof",
-                cancelButtonText: "Cancel"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = "https://wa.me/919110218701?text=Hello,%20I%20have%20paid%20for%20the%20NWKRTC%20Eicher%20BS-III%20Mod.%20Here%20is%20my%20payment%20proof.";
-                }
-            });
-        }
-
-        // Payment Timer Countdown
-        let timeLeft = 600;
-        function updateTimer() {
-            let minutes = Math.floor(timeLeft / 60);
-            let seconds = timeLeft % 60;
-            document.getElementById("timer").innerText = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-            if (timeLeft > 0) {
-                timeLeft--;
-                setTimeout(updateTimer, 1000);
-            } else {
-                Swal.fire({
-                    title: "Payment Time Expired!",
-                    text: "Please refresh and try again.",
-                    icon: "error"
-                });
-            }
-        }
-        updateTimer();
     </script>
 </body>
 </html>
