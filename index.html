@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAM Garage Official</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body class="bg-gray-100 text-gray-900">
+
+    <!-- Pop-up Banner -->
+    <div id="popup" class="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center z-50">
+        <div class="relative">
+            <img src="banner.jpg" alt="Banner" class="w-auto h-auto max-h-[90vh]">
+            <button onclick="closePopup()" class="absolute top-2 right-2 bg-red-600 text-white px-3 py-1 rounded-full">X</button>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="bg-blue-900 text-white p-4 flex items-center justify-between">
+        <img src="logo.png" alt="SAM Garage Logo" class="h-12">
+        <h1 class="text-xl font-bold">SAM Garage Official</h1>
+    </header>
+
+    <!-- Main Content -->
+    <div class="max-w-6xl mx-auto p-6 bg-white shadow-lg rounded-lg mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Left Content -->
+        <div class="md:col-span-2">
+            <img src="thumbnail.jpg" alt="Mod Thumbnail" class="w-full rounded">
+            
+            <h2 class="text-2xl font-bold text-blue-800 mt-4">NWKRTC Eicher BS-III</h2>
+            <p class="text-gray-700">Author: <span class="font-semibold">SAM</span></p>
+
+            <!-- Silent Features -->
+            <div class="mt-4">
+                <h3 class="text-lg font-semibold">Silent Features:</h3>
+                <ul class="list-disc ml-5 text-gray-600">
+                    <li>Realistic bus design</li>
+                    <li>High-quality textures</li>
+                    <li>Smooth driving experience</li>
+                </ul>
+            </div>
+
+            <!-- Hero Features -->
+            <div class="mt-4">
+                <h3 class="text-lg font-semibold">Hero Features:</h3>
+                <ul class="list-disc ml-5 text-gray-600">
+                    <li>Ambient Lighting</li>
+                    <li>Realistic Driving Experience</li>
+                    <li>Photorealistic Mod</li>
+                </ul>
+            </div>
+
+            <!-- Pricing Section -->
+            <div class="mt-6 bg-gray-200 p-4 rounded text-center">
+                <p class="text-gray-600 line-through">Original Price: ₹99</p>
+                <p class="text-2xl font-bold text-red-600">Limited Offer: ₹39</p>
+            </div>
+
+            <!-- Buy Now Button -->
+            <div class="mt-4 text-center">
+                <button onclick="openPayment()" class="bg-green-600 text-white px-5 py-2 rounded shadow-lg hover:bg-green-700 transition">
+                    Buy Now
+                </button>
+            </div>
+        </div>
+
+        <!-- Right Side Banner Image -->
+        <div class="md:col-span-1 flex justify-center">
+            <img src="banner.jpg" alt="Banner Image" class="w-full max-w-sm rounded-lg shadow-md">
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-blue-900 text-white text-center p-4 mt-10">
+        <p>&copy; 2025 SAM Garage Official. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
+        }
+
+        function openPayment() {
+            Swal.fire({
+                title: "Proceed to Payment",
+                text: "Pay ₹39 using UPI or QR Code",
+                icon: "info",
+                showCancelButton: true,
+                confirmButtonText: "Pay Now",
+                cancelButtonText: "Cancel"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "payment.html";
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>
