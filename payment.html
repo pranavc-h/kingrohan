@@ -31,6 +31,87 @@
         <div class="mt-6 flex flex-col items-center">
             <img src="qr-code.jpg" alt="QR Code" class="w-40 mx-auto rounded-lg shadow-md">
             <p class="text-sm text-gray-600 mt-2">Scan to Pay: <span class="font-semibold">rohan.21@superyes</span></p>
+            <p class="text-gray-700 mt-2">If the link does not work, manually enter this UPI ID in your app:</p>
+            <p class="text-lg font-bold text-blue-700">rohan.21@superyes</p>
+        </div>
+
+        <!-- UPI Payment Buttons -->
+        <div class="mt-4 flex flex-col gap-3">
+            <a href="upi://pay?pa=rohan.21@superyes&pn=SAM%20Garage&am=39.00&cu=INR&tn=Purchase%20of%20NWKRTC%20Eicher%20BS-III" 
+               class="bg-green-600 text-white px-5 py-2 rounded shadow-lg hover:bg-green-700 transition inline-block">
+                Pay via UPI App
+            </a>
+            <a href="phonepe://pay?pa=rohan.21@superyes&pn=SAM%20Garage&am=39.00&cu=INR" 
+               class="bg-purple-600 text-white px-5 py-2 rounded shadow-lg hover:bg-purple-700 transition inline-block">
+                Pay via PhonePe
+            </a>
+            <a href="tez://upi/pay?pa=rohan.21@superyes&pn=SAM%20Garage&am=39.00&cu=INR" 
+               class="bg-blue-600 text-white px-5 py-2 rounded shadow-lg hover:bg-blue-700 transition inline-block">
+                Pay via Google Pay
+            </a>
+            <a href="paytmmp://pay?pa=rohan.21@superyes&pn=SAM%20Garage&am=39.00&cu=INR" 
+               class="bg-yellow-600 text-white px-5 py-2 rounded shadow-lg hover:bg-yellow-700 transition inline-block">
+                Pay via Paytm
+            </a>
+        </div>
+        
+        <!-- WhatsApp Proof Button -->
+        <div class="mt-6">
+            <button onclick="confirmPayment()" class="bg-blue-600 text-white px-4 py-2 rounded shadow-lg hover:bg-blue-700 transition">
+                Send Payment Proof via WhatsApp
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-blue-900 text-white text-center p-4 mt-10 shadow-md">
+        <p>&copy; 2025 SAM Garage Official. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function confirmPayment() {
+            Swal.fire({
+                title: "Payment Completed?",
+                text: "Ensure you have completed the payment before sending proof.",
+                icon: "question",
+                showCancelButton: true,
+                confirmButtonText: "Yes, Send Proof",
+                cancelButtonText: "Cancel"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "https://wa.me/919110218701?text=Hello,%20I%20have%20paid%20₹39%20for%20the%20NWKRTC%20Eicher%20BS-III%20Mod.%20Here%20is%20my%20payment%20proof.";
+                }
+            });
+        }
+
+        // Payment Timer Countdown
+        let timeLeft = 600;
+        function updateTimer() {
+            let minutes = Math.floor(timeLeft / 60);
+            let seconds = timeLeft % 60;
+            document.getElementById("timer").innerText = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+            if (timeLeft > 0) {
+                timeLeft--;
+                setTimeout(updateTimer, 1000);
+            } else {
+                Swal.fire({
+                    title: "Payment Time Expired!",
+                    text: "Please refresh and try again.",
+                    icon: "error"
+                });
+            }
+        }
+        updateTimer();
+    </script>
+</body>
+</html>
+0:00</span></p>
+        </div>
+
+        <!-- QR Code & Payment Options -->
+        <div class="mt-6 flex flex-col items-center">
+            <img src="qr-code.jpg" alt="QR Code" class="w-40 mx-auto rounded-lg shadow-md">
+            <p class="text-sm text-gray-600 mt-2">Scan to Pay: <span class="font-semibold">rohan.21@superyes</span></p>
             <a href="https://pay.google.com/gp/p/ui/pay?pa=rohan.21@superyes&pn=SAM%20Garage&am=39&cu=INR" 
                class="mt-4 bg-green-600 text-white px-5 py-2 rounded shadow-lg hover:bg-green-700 transition inline-block">
                 Pay via UPI App
