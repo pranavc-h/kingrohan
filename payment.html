@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment - SAM Garage Official</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body class="bg-gray-100 text-gray-900">
+    <div class="max-w-md mx-auto my-10 bg-white p-6 rounded-lg shadow-lg text-center">
+        <h1 class="text-xl font-bold text-blue-800">Complete Your Payment</h1>
+        
+        <p class="mt-2 text-gray-700">Pay <span class="font-bold text-red-600">₹39</span> using UPI or QR Code.</p>
+        
+        <!-- QR Code -->
+        <div class="mt-4">
+            <img src="qr-code.jpg" alt="QR Code" class="w-40 mx-auto">
+            <p class="text-sm text-gray-600 mt-2">Scan to Pay: <span class="font-semibold">rohan.21@superyes</span></p>
+        </div>
+        
+        <!-- UPI Payment Link -->
+        <div class="mt-4">
+            <a href="upi://pay?pa=rohan.21@superyes&pn=SAM%20Garage&am=39&cu=INR" 
+               class="bg-green-600 text-white px-5 py-2 rounded shadow-lg hover:bg-green-700 transition inline-block">
+                Pay via UPI App
+            </a>
+        </div>
+        
+        <!-- WhatsApp Proof Button -->
+        <div class="mt-6">
+            <button onclick="sendProof()" class="bg-blue-600 text-white px-4 py-2 rounded shadow-lg hover:bg-blue-700 transition">
+                Send Payment Proof via WhatsApp
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function sendProof() {
+            Swal.fire({
+                title: "Payment Completed?",
+                text: "Make sure you have paid before proceeding.",
+                icon: "question",
+                showCancelButton: true,
+                confirmButtonText: "Yes, Send Proof",
+                cancelButtonText: "Cancel"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "https://wa.me/919110218701?text=Hello,%20I%20have%20paid%20for%20the%20NWKRTC%20Eicher%20BS-III%20Mod.%20Here%20is%20my%20payment%20proof.";
+                }
+            });
+        }
+    </script>
+</body>
+</html>
