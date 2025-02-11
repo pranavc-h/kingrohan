@@ -12,7 +12,7 @@
     <!-- Pop-up Banner -->
     <div id="popup" class="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center z-50">
         <div class="relative">
-            <img src="banner.jpg" alt="Banner" class="w-auto h-auto max-h-[90vh]">
+            <img src="banner.jpg" alt="Banner" class="w-auto h-auto max-h-[90vh] rounded-lg shadow-lg">
             <button onclick="closePopup()" class="absolute top-2 right-2 bg-red-600 text-white px-3 py-1 rounded-full">X</button>
         </div>
     </div>
@@ -25,14 +25,12 @@
 
     <!-- Main Content -->
     <div class="max-w-6xl mx-auto p-6 bg-white shadow-lg rounded-lg mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
-        <!-- Left Content -->
         <div class="md:col-span-2">
             <img src="thumbnail.jpg" alt="Mod Thumbnail" class="w-full rounded">
             
             <h2 class="text-2xl font-bold text-blue-800 mt-4">NWKRTC Eicher BS-III</h2>
             <p class="text-gray-700">Author: <span class="font-semibold">SAM</span></p>
 
-            <!-- Silent Features -->
             <div class="mt-4">
                 <h3 class="text-lg font-semibold">Silent Features:</h3>
                 <ul class="list-disc ml-5 text-gray-600">
@@ -42,7 +40,6 @@
                 </ul>
             </div>
 
-            <!-- Hero Features -->
             <div class="mt-4">
                 <h3 class="text-lg font-semibold">Hero Features:</h3>
                 <ul class="list-disc ml-5 text-gray-600">
@@ -52,13 +49,11 @@
                 </ul>
             </div>
 
-            <!-- Pricing Section -->
             <div class="mt-6 bg-gray-200 p-4 rounded text-center">
                 <p class="text-gray-600 line-through">Original Price: ₹99</p>
                 <p class="text-2xl font-bold text-red-600">Limited Offer: ₹39</p>
             </div>
 
-            <!-- Buy Now Button -->
             <div class="mt-4 text-center">
                 <button onclick="openPayment()" class="bg-green-600 text-white px-5 py-2 rounded shadow-lg hover:bg-green-700 transition">
                     Buy Now
@@ -66,16 +61,31 @@
             </div>
         </div>
 
-        <!-- Right Side Banner Image -->
         <div class="md:col-span-1 flex justify-center">
             <img src="banner.jpg" alt="Banner Image" class="w-full max-w-sm rounded-lg shadow-md">
         </div>
     </div>
 
-    <!-- Footer -->
     <footer class="bg-blue-900 text-white text-center p-4 mt-10">
         <p>&copy; 2025 SAM Garage Official. All rights reserved.</p>
     </footer>
+
+    <!-- Chatbot Floating Button -->
+    <div id="chat-button" class="fixed bottom-5 right-5 bg-blue-600 text-white px-4 py-3 rounded-full cursor-pointer shadow-lg text-sm font-semibold">
+        💬 Chat with SAM Assist
+    </div>
+
+    <!-- Fullscreen Chatbot -->
+    <div id="chat-box" class="fixed inset-0 bg-white hidden z-50 flex flex-col">
+        <div class="bg-blue-600 text-white p-4 flex justify-between items-center">
+            <span class="font-bold text-lg">SAM Assist</span>
+            <button onclick="closeChat()" class="bg-red-500 px-3 py-1 rounded-full">X</button>
+        </div>
+        <div id="chat-content" class="flex-1 p-4 overflow-y-auto text-sm bg-gray-100">
+            <div class="text-gray-700 mb-2"><strong>Bot:</strong> How can I help you?</div>
+            <div id="chat-options"></div>
+        </div>
+    </div>
 
     <script>
         function closePopup() {
@@ -95,6 +105,69 @@
                     window.location.href = "payment.html";
                 }
             });
+        }
+
+        const faq = {
+            "Can I review this mod on my channel?": "Yes, but please provide proper credits to SAM Garage Official.",
+            "Who is the owner of this mod?": "The mod is created by SAM, the owner of SAM Garage Official.",
+            "How do I add this mod to the game?": "Download the mod file and place it inside the Bussid Mod folder on your device.",
+            "How can I buy this mod?": "Click the 'Buy Now' button and complete the payment process.",
+            "What features does this mod have?": "This mod includes Ambient Lighting, Realistic Driving Experience, and Photorealistic Design.",
+            "How do I contact support?": "You can reach out via WhatsApp at +91 9110218701.",
+            "Other Query": "Please describe your issue. We'll get back to you soon."
+        };
+
+        document.getElementById("chat-button").addEventListener("click", function() {
+            document.getElementById("chat-box").classList.remove("hidden");
+            showOptions();
+        });
+
+        function closeChat() {
+            document.getElementById("chat-box").classList.add("hidden");
+        }
+
+        function showOptions() {
+            let chatOptions = document.getElementById("chat-options");
+            chatOptions.innerHTML = ""; 
+
+            for (let question in faq) {
+                let btn = document.createElement("button");
+                btn.innerText = question;
+                btn.className = "block w-full text-left p-3 bg-white my-1 rounded border hover:bg-gray-200";
+                btn.onclick = function() {
+                    answerQuestion(question);
+                };
+                chatOptions.appendChild(btn);
+            }
+        }
+
+        function answerQuestion(question) {
+            let chatContent = document.getElementById("chat-content");
+
+            chatContent.innerHTML += `<div class="text-right text-blue-600 mb-2"><strong>You:</strong> ${question}</div>`;
+            chatContent.innerHTML += `<div id="thinking" class="text-gray-500 italic">Thinking...</div>`;
+
+            setTimeout(() => {
+                document.getElementById("thinking").remove();
+                chatContent.innerHTML += `<div class="text-left text-gray-700 mb-2"><strong>Bot:</strong> ${faq[question]}</div>`;
+
+                if (question === "Other Query") {
+                    chatContent.innerHTML += `
+                        <input id="user-query" type="text" class="w-full border p-2 rounded my-2" placeholder="Describe your issue...">
+                        <button onclick="submitQuery()" class="bg-blue-600 text-white px-3 py-2 rounded">Send</button>
+                    `;
+                } else {
+                    showOptions();
+                }
+
+                chatContent.scrollTop = chatContent.scrollHeight;
+            }, 1000);
+        }
+
+        function submitQuery() {
+            let query = document.getElementById("user-query").value;
+            if (query === "") return;
+            window.open(`https://wa.me/919110218701?text=User Query: ${query}`);
         }
     </script>
 
